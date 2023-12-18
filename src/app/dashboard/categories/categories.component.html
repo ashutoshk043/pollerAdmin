@@ -1,0 +1,121 @@
+<div class="conatiner-fluid router-page">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <div class="table_outer_div">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="d-flex justify-content-between">Blog Categories <a href="#"
+                                    data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                    (click)="setValueToModel('Blog Categories')"><i class="bi bi-plus-square"></i></a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let cat of blogCategories">
+                            <td class="d-flex justify-content-between">{{cat.childCategory}}
+                                <div>
+                                    <i class="bi bi-pencil-square p-2" data-bs-toggle="modal" data-bs-target="#editModel" (click)="editCat(cat)"></i>
+                                    <i class="bi bi-trash3 p-2" (click)="deleteCat(cat)"></i>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <div class="table_outer_div">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="d-flex justify-content-between">Web-Story Categories <a href="#"
+                                    data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                    (click)="setValueToModel('Web-Story Categories')"><i
+                                        class="bi bi-plus-square"></i></a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let cat of webStroryCategories">
+                            <td class="d-flex justify-content-between">{{cat.childCategory}}
+                                <div>
+                                    <i class="bi bi-pencil-square p-2" data-bs-toggle="modal" data-bs-target="#editModel" (click)="editCat(cat)"></i>
+                                    <i class="bi bi-trash3 p-2" (click)="deleteCat(cat)"></i>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <div class="table_outer_div">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="d-flex justify-content-between">Wishing-Script Categories <a href="#"
+                                    data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                    (click)="setValueToModel('Wishing-Script Categories')"><i
+                                        class="bi bi-plus-square"></i></a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let cat of wishingScriptCategories">
+                            <td class="d-flex justify-content-between">{{cat.childCategory}}
+                                <div>
+                                    <i class="bi bi-pencil-square p-2" data-bs-toggle="modal" data-bs-target="#editModel" (click)="editCat(cat)"></i>
+                                    <i class="bi bi-trash3 p-2" (click)="deleteCat(cat)"></i>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{modelTitle}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="categoryForms" (ngSubmit)="submitCategory()">
+                    <input type="text" formControlName="newCategory" class="form-control" id="blog_cat"
+                        placeholder={{actionType}}>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal" [disabled]="!categoryForms.valid">{{clickAction}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Edit Modal -->
+<div class="modal fade" id="editModel" tabindex="-1" aria-labelledby="editModelLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModelLabel">{{modelTitle}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="categoryForms" (ngSubmit)="updateCategory()">
+                    <input type="text" formControlName="newCategory" class="form-control" id="blog_cat"
+                        placeholder={{actionType}}>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal" [disabled]="!categoryForms.valid">{{clickAction}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

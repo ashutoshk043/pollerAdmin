@@ -1,0 +1,117 @@
+<div class="conatiner-fluid router-page">
+    <div class="row">
+        <div class="col col-sm-12 col-md-6 col-lg-6 col-xl-6" >
+            <form class="form_data" [formGroup]="politicalScript" (ngSubmit)="submit(scriptIdToedit)">
+                <div class="mb-3">
+                    <label for="event" class="form-label">Event</label>
+                    <input type="text" class="form-control" id="event" placeholder="eg. UP Election 2024" formControlName="event">
+                </div>
+                <div class="mb-3">
+                    <label for="eventType" class="form-label">Event Type</label>
+                    <input type="text" class="form-control" id="eventType" value="Political" formControlName="eventType">
+                </div>
+                <div class="mb-3">
+                    <label for="eventTheme" class="form-label">Event Theme</label>
+                    <select class="form-select" aria-label="Default select example" formControlName="eventTheme">
+                        <option selected>Click To Select Theme</option>
+                        <option value="LineDrop">LineDrop</option>
+                        <option value="Bubbles">Bubbles</option>
+                        <option value="FallingLeaves">FallingLeaves</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
+
+                <div class=" text-center">Event Details</div>
+                <div class="mb-3">
+                    <label for="thumbnails" class="form-label">Thumbnail</label>
+                    <input type="file" class="form-control" id="thumbnails" formControlName="thumbnail" (change)="selectThumbnail($event)">
+                </div>
+
+                <div class="mb-3">
+                    <label for="expiryDate" class="form-label">Expiry Date</label>
+                    <input type="date" class="form-control" id="expiryDate" formControlName="exipryDate">
+                </div>
+                <div class="mb-3">
+                    <label for="firstwish" class="form-label">First Wish</label>
+                    <input type="text" class="form-control" id="firstwish" placeholder="eg. Wihsing you." formControlName="firstWish">
+                </div>
+                <div class="mb-3">
+                    <label for="firstMessage" class="form-label">First Message</label>
+                    <textarea class="form-control" id="firstMessage" placeholder="first description text" formControlName="firstMessage"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="secondMessahe" class="form-label">Second Message</label>
+                    <textarea class="form-control" id="secondMessahe" placeholder="second description text" formControlName="secondMessage"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="mp3" class="form-label">Mp3 Audio (Optional)</label>
+                    <input type="file" accept="audio/mp3" class="form-control" id="mp3" formControlName="mp3File" (change)="selectMp3File($event)">
+                </div>
+                <div class="mb-3">
+                    <label for="doortext" class="form-label">Text on Door</label>
+                    <input type="text" class="form-control" id="doortext" placeholder="eg. click on the icon to open the wishing script" formControlName="doorScript">
+                </div>
+                <div class="mb-3">
+                    <label for="doorImage" class="form-label">Door Image</label>
+                    <input type="file" class="form-control" id="doorImage" formControlName="doorsImage" (change)="selectDoorsImage($event)">
+                </div>
+                <div class="mb-3">
+                    <label for="doorIcon" class="form-label">Gif Icon</label>
+                    <input type="file" class="form-control" id="doorIcon" formControlName="doorrsIcon" (change)="selectDoorsIcon($event)">
+                </div>
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" placeholder="eg. title of the event." formControlName="title">
+                </div>
+                <div class="mb-3">
+                    <label for="Description" class="form-label">Description</label>
+                    <textarea class="form-control" id="Description" placeholder="eg. short description of the event." formControlName="description"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="Tags" class="form-label">Tags</label>
+                    <textarea class="form-control" id="Tags" placeholder="eg. up-election, loksabha-chunav-2024." formControlName="tags"></textarea>
+                </div>
+                <!-- <div class="mb-3">
+                    <label for="chartdata" class="form-label">Inicial Chart Data</label>
+                    <input type="text" class="form-control" id="chartdata" placeholder="eg. 0,0,0,0" formControlName="inicialChartData">
+                </div> -->
+                <div class="mb-3">
+                    <label for="eventTheme" class="form-label">Chart Type</label>
+                <select class="form-select" aria-label="Default select example" formControlName="chartType">
+                    <option selected>Click To Select Theme</option>
+                    <option value="Pie">Pie</option>
+                    <option value="Line">Line</option>
+                    <option value="Column">Column</option>
+                    <option value="Others">Others</option>
+                </select>
+                </div>
+                <button *ngIf="btnValue!='Update'" type="submit" class="btn btn-primary w-100" [disabled]="!politicalScript.valid">{{btnValue}}</button>
+                <button *ngIf="btnValue=='Update'" type="submit" class="btn btn-primary w-100" [disabled]="!politicalScript.valid">{{btnValue}}</button>
+            </form>
+        </div>
+        <div class="col col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <table class="table table-warning">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Event</th>
+                    <th scope="col">Expiry Date</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let script of scriptData index as i">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{script.event}}</td>
+                    <td>{{script.exipryDate | date}}</td>
+                    <td>{{script.title}}</td>
+                    <td [ngClass]="script.status == 0 ? 'bg-danger text-center statusIs' : 'bg-success text-center statusIs'" (click)="changeStatus(script.status, script._id)">{{script.status==0 ? "Enable" : "Disable"}}</td>
+                    <td class="edit text-center" (click)="updateScript(script)">Edit</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>

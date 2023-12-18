@@ -1,0 +1,17 @@
+label{
+    font-size: 25px;
+    padding: 1%;
+    font-weight: 700;
+}
+.publish_btn_div{
+    padding: 30px;
+}
+.publish_btn{
+    position: absolute;
+    width: 10%;
+    left: 85%;
+    padding: 10px;
+}
+.publish_btn:hover{
+    background-color: #e75252;
+}

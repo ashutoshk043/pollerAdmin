@@ -1,0 +1,10 @@
+.form_data{
+    height: 80vh;
+    overflow-y: scroll;
+}
+label{
+    box-shadow: #9b9090;
+    letter-spacing: 2px;
+    font-weight: 500;
+    font-size: 20px;
+}

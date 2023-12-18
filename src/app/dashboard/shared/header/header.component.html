@@ -1,0 +1,20 @@
+<nav class="navbar sticky-top">
+  <!-- [style.background-color]="randomColors" -->
+    <div class="container-fluid nav">
+      <a class="navbar-brand" href="#">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTcaMvfZwPrFqCRB31UBCFHcVG4cnrbKmOlA&usqp=CAU" alt="" width="150" height="30" class="d-inline-block align-text-top">
+      </a>
+        <li class="title_text">{{newTitle}}</li>
+        <li>
+        <div class="dropdown">
+            <span class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{currDate | date:'medium'}}
+            </span>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item logout" href="#" (click)="logout()" >Logout <i class="bi bi-box-arrow-right"></i></a>
+            </div>
+          </div>
+        </li>
+        
+    </div>
+  </nav>

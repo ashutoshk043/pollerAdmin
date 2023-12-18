@@ -1,0 +1,66 @@
+/* Option 2: Import via CSS */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
+
+@import 'ngx-toastr/toastr';
+
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.router-page{
+    position: absolute;
+    top: 6.5%;
+    left:16%;
+    height: 95vh;
+    width: 83vw;
+    padding: 2%;
+}
+
+.title_text{
+    font-size: 30px;
+    padding: 5px;
+}
+.logout{
+    background: #fff!important;
+    letter-spacing: 2px;
+    height: auto;
+    width: max-content;
+    color: #000;
+}
+
+.error{
+    color: red;
+}
+.sidebar_wrapper{
+    position: absolute; 
+    top: 15px;
+}
+.previewimage{
+    width: 100%;
+    height: 100%;
+}
+/* editor css */
+.angular-editor-textarea img{
+    height: auto!important;
+    width: 100%!important;
+    padding: 5%;
+}
+.thumbnail_img img{
+    height: 100px;
+    width: 300px;
+    object-fit: cover;
+}
+.flexStyle li{
+padding: 5%;
+}
+.flexStyle li:hover{
+    background-color: rgb(255, 5, 188);
+    border-radius: 50%;
+    color: #fff;
+    }
+.flexStyle li i{
+   font-size: 150%;
+   cursor: pointer;
+    }

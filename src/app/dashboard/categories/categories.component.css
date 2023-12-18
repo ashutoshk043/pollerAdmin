@@ -1,0 +1,13 @@
+.table_outer_div{
+    max-height: 300px;
+    overflow:hidden;
+     overflow-y:scroll;
+}
+.bi-pencil-square, .bi-trash3,.bi-plus-square {
+    color: red;
+    cursor: pointer;
+}
+.bi-pencil-square:hover, .bi-trash3:hover, .bi-plus-square:hover {
+    color: rgb(3, 78, 255);
+    cursor: pointer;
+}

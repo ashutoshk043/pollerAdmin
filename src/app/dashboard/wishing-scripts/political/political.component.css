@@ -1,0 +1,21 @@
+.form_data{
+    height: 80vh;
+    overflow-y: scroll;
+}
+label{
+    box-shadow: #9b9090;
+    letter-spacing: 2px;
+    font-weight: 500;
+    font-size: 20px;
+}
+.statusIs{
+    cursor: pointer;
+    color: #fff;
+}
+.edit{
+    cursor: pointer;
+    color: #000;
+}
+.formDiv{
+    overflow-y: scroll;
+}
