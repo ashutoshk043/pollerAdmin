@@ -25,7 +25,7 @@
                 <th scope="row">{{i+1}}</th>
                 <!-- createdAt: 0, updatedAt: 0, -->
                 <td>{{row.heading}}</td>
-                <td class="thumbnail_img"><img src="https://pub-e1175ceb9dad4964bc37471a71fd2e82.r2.dev/{{row.thumbnail}}"></td>
+                <td class="thumbnail_img"><img src="{{bucketBaseUrl}}/{{row.thumbnail}}"></td>
                 <td>{{row.category}}</td>
                 <td>{{row.updatedAt | date:'medium'}}</td>
                 <td [ngClass]="row.status == 'draft' ? 'bg-warning text-center p-5' : 'bg-success text-center p-5'">{{row.status}}</td>

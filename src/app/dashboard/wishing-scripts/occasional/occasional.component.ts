@@ -91,8 +91,6 @@ export class OccasionalComponent {
     this.formData.append('description', this.normalScript.value.description);
     this.formData.append('tags', this.normalScript.value.tags);
 
-    // console.log(this.normalScript.value, "valuse are")
-
     this.wishingScript.createNornalWishingScript(this.formData).subscribe({
       next: (res: any) => {
         if (res.status) {
