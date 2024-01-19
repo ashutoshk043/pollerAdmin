@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import jwt_decode from "jwt-decode";
 import Swal from 'sweetalert2'
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-blogs',
@@ -23,37 +24,46 @@ export class BlogsComponent {
     private titleService: TitleService,
     private blogService:BlogService,
     private toastr : ToastrService,
-    private cookieService:CookieService
+    private cookieService:CookieService,
+    private loader:NgxSpinnerService
     
     ) {}
 
   ngOnInit() {
+    
     this.titleService.setTitle(this.title);
     this.getAllBlogs()
     this.getUserDetails()
+    
   }
 
   getAllBlogs(){
+    this.loader.show()
     this.blogService.getAllBlogs().subscribe({
       next:(res:any)=>{
         console.log(res)
         if(res.status){
           this.receivedData = res.message
         }
+        this.loader.hide()
       },
       error: (error:any)=>{
         console.log(error)
+        this.loader.hide()
       }
     })
   }
 
   getUserDetails(){
+    this.loader.show()
     const token = this.cookieService.get('auth')
     const decoded: any = jwt_decode(token)
     this.authorId = decoded.data._id
+    this.loader.hide()
   }
 
   changeStatus(_id:string, status:string){
+    this.loader.show()
     let SendStatus = ''
     if(status=='draft'){
       SendStatus = 'published'
@@ -68,9 +78,11 @@ export class BlogsComponent {
         this.getAllBlogs()
       }
     })
+    this.loader.hide()
   }
 
   deleteblog(_id:string){
+    this.loader.show()
     let data = {_id:_id, authorId : this.authorId }
     Swal.fire({
       title: 'Are you sure want to delete this blog ?',
@@ -108,10 +120,13 @@ export class BlogsComponent {
         
       }
     })
+    this.loader.hide()
   }
 
   editblog(row:any){
+    this.loader.show()
     this.blogService.setEditBlogId(row)
+    this.loader.hide()
   }
 
 }
