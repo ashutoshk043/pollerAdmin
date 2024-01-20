@@ -24,6 +24,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { CategoriesComponent } from './categories/categories.component';
 import { AddEditStoriesComponent } from './web-stories/add-edit-stories/add-edit-stories.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
  
 
@@ -53,7 +54,8 @@ import { AddEditStoriesComponent } from './web-stories/add-edit-stories/add-edit
     FormsModule,
     ReactiveFormsModule,
     AngularEditorModule,
-    SweetAlert2Module.forRoot()
+    SweetAlert2Module.forRoot(),
+    NgxSpinnerModule
   ],
   providers: [RandomColorService, Title],
 })

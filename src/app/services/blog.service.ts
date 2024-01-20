@@ -3,15 +3,14 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class BlogService {
 
-  clickedRow:any
-
   constructor(private http: HttpClient, private cookieService: CookieService) { }
+
+  clickedRow:any
 
   createBlog(data: any) {
     const token = this.cookieService.get('auth')

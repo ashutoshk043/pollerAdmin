@@ -8,6 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { ToastrService } from 'ngx-toastr';
 import jwt_decode from "jwt-decode";
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -29,10 +30,10 @@ export class AddEditComponent {
   formData = new FormData();
 
   
-  constructor(private blogservice:BlogService ,private titleService: TitleService, private formbuilder:FormBuilder, private cookieservice:CookieService, private toster:ToastrService, private router:Router) {}
+  constructor(private loader:NgxSpinnerService ,private blogservice:BlogService ,private titleService: TitleService, private formbuilder:FormBuilder, private cookieservice:CookieService, private toster:ToastrService, private router:Router) {
+  }
 
   ngOnInit() {
-    
     this.titleService.setTitle(this.title);
     this.createBlogForm()
     this.getUserDetails()
