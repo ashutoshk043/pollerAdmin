@@ -19,4 +19,7 @@ export class WebstoryService {
       })
   }
 
+  getstory(){
+    return this.http.get(`${environment.baseUrl}/getAllStoriesForDashboard`)
+  }
 }

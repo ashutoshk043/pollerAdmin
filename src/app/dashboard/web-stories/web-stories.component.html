@@ -11,17 +11,21 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
+                <th scope="col">Thumbnail</th>
+                <th scope="col">Category</th>
                 <th scope="col">Added On</th>
                 <th scope="col">Status</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>mdo</td>
+              <tr *ngFor="let story of allStories; index as i">
+                <th scope="row">{{i+1}}</th>
+                <td>{{story.story_heading}}</td>
+                <td class="thumbnail_img"><img src="{{bucketBaseUrl}}/{{story.storiesData[0].story_image}}"></td>
+                <td>{{story.category}}</td>
+                <td>{{story.createdAt | date}}</td>
+                <td>{{story.status == 1 ?'Published' :'Draft'}}</td>
                 <td>
                     <ul class="d-flex flexStyle">
                         <li>Edit</li>
@@ -30,7 +34,7 @@
                     </ul>
                 </td>
               </tr>
-              <tr>
+              <!-- <tr>
                 <th scope="row">2</th>
                 <td>Jacob</td>
                 <td>Thornton</td>
@@ -55,7 +59,7 @@
                         <li>Change Status</li>
                     </ul>
                 </td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
     </div>

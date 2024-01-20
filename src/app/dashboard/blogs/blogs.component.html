@@ -27,7 +27,7 @@
                 <td>{{row.heading}}</td>
                 <td class="thumbnail_img"><img src="{{bucketBaseUrl}}/{{row.thumbnail}}"></td>
                 <td>{{row.category}}</td>
-                <td>{{row.updatedAt | date:'medium'}}</td>
+                <td>{{row.updatedAt | date}}</td>
                 <td [ngClass]="row.status == 'draft' ? 'bg-warning text-center p-5' : 'bg-success text-center p-5'">{{row.status}}</td>
                 <td>{{row.authorName}}</td>
                 <td>

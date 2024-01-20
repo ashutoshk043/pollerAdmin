@@ -30,7 +30,12 @@ export class AddEditStoriesComponent {
       meta_keywords:['', Validators.required],
       category:['', Validators.required],
       meta_description:['',Validators.required],
-      story_details: this.fb.array([]) ,  
+      story_details: this.fb.array([
+        {  
+          story_text: ['', Validators.required],  
+          story_image: ['', Validators.required]  
+        }
+      ]) ,  
     });  
   }
 
