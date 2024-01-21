@@ -32,4 +32,16 @@ export class WebStoriesComponent {
     })
   }
 
+  editblog(data:any){
+    alert('edit')
+  }
+
+  deleteblog(id:any){
+
+  }
+
+  changeStatus(id:any, status:any){
+
+  }
+
 }

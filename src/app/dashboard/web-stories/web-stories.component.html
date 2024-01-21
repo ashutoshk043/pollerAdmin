@@ -25,14 +25,15 @@
                 <td class="thumbnail_img"><img src="{{bucketBaseUrl}}/{{story.storiesData[0].story_image}}"></td>
                 <td>{{story.category}}</td>
                 <td>{{story.createdAt | date}}</td>
-                <td>{{story.status == 1 ?'Published' :'Draft'}}</td>
+                <td [ngClass]="story.status == '0' ? 'bg-warning text-center p-5' : 'bg-success text-center p-5'">{{story.status == 1 ?'Published' :'Draft'}}</td>
                 <td>
-                    <ul class="d-flex flexStyle">
-                        <li>Edit</li>
-                        <li>Delete</li>
-                        <li>Change Status</li>
-                    </ul>
-                </td>
+                  <ul class="d-flex flexStyle">
+                      <li routerLink="/add-edit-webstories" target="_blank" (click)="editblog(story)"><i class="bi bi-pencil-square"></i></li>
+                      <li (click)="deleteblog(story.status._id)"><i class="bi bi-trash3-fill"></i></li>
+                      <li (click)="changeStatus(story.status._id, story.status)" *ngIf="story.status =='1'"><i class="bi bi-toggle2-off"></i></li>
+                      <li (click)="changeStatus(story.status._id, story.status)" *ngIf="story.status=='0'"><i class="bi bi-toggle2-on"></i></li>
+                  </ul>
+              </td>
               </tr>
               <!-- <tr>
                 <th scope="row">2</th>
