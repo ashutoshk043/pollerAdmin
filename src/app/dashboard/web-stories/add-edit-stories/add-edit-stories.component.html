@@ -38,7 +38,29 @@
               </form>
         </div>
         <div class="col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem culpa numquam earum suscipit! Quisquam adipisci fuga ullam facere tempore sapiente nisi numquam aliquam eligendi. Labore expedita voluptatem sequi quae accusantium?</p>
+            <div class="text-center">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Updated At</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let story of allStories; let i = index">
+                            <th scope="row">{{ i+1 }}</th>
+                            <td>{{ story.story_heading.slice(0, 300) }}</td>
+                            <td>{{ story.category }}</td>
+                            <td>{{ story.updatedAt }}</td>
+                            <td>{{ story.status == 1 ? 'Published' : 'Draft' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+        
     </div>
 </div>

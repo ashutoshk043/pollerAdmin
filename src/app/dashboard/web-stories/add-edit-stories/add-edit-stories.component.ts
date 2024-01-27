@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, FormArray, FormBuilder, Validators, AbstractControl } from '@angular/forms'  
 import { WebstoryService } from 'src/app/services/webstory.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -14,52 +15,54 @@ export class AddEditStoriesComponent {
   webStoryForm!:FormGroup
   imageBuffer:any
   formData = new FormData()
+  allStories:any
 
   
 
-  constructor(private fb:FormBuilder, private webstory:WebstoryService, private toster:ToastrService) {  
+  constructor(private fb:FormBuilder, private webstory:WebstoryService, private toster:ToastrService, private loader: NgxSpinnerService) {  
      
   }  
 
   ngOnInit(){
     this.createWebStoryform()
+    this.editFormData()
+    this.getAllStories()
   }
 
-  createWebStoryform(){
-    this.webStoryForm = this.fb.group({  
-      story_heading: ['', Validators.required],  
-      meta_keywords:['', Validators.required],
-      category:['', Validators.required],
-      meta_description:['',Validators.required],
-      story_details: this.fb.array([
-        {  
-          story_text: ['', Validators.required],  
-          story_image: ['', Validators.required]  
-        }
-      ]) ,  
-    });  
-  }
+  createWebStoryform() {
+    this.webStoryForm = this.fb.group({
+        story_heading: ['', Validators.required],
+        meta_keywords: ['', Validators.required],
+        category: ['', Validators.required],
+        meta_description: ['', Validators.required],
+        story_details: this.fb.array([
+            this.createStoryGroup() // Initial story group
+        ]),
+    });
+}
 
 
   story_details():FormArray{
       return this.webStoryForm.get('story_details') as FormArray
   }
 
-  new_story_details(): FormGroup {  
-    return this.fb.group({  
-      story_text: ['', Validators.required],  
-      story_image: ['', Validators.required]  
-    })  
-  }  
+  createStoryGroup() {
+    return this.fb.group({
+        story_text: ['', Validators.required],
+        story_image: ['', Validators.required]
+    });
+}  
 
 
-  addMore(){
-   this.story_details().push(this.new_story_details())
-  }
+addMore() {
+  const storyDetailsArray = this.webStoryForm.get('story_details') as FormArray;
+  storyDetailsArray.push(this.createStoryGroup());
+}
 
-  deleteOne(index:number){
-    this.story_details().removeAt(index);  
-  }
+deleteOne(index: number) {
+  const storyDetailsArray = this.webStoryForm.get('story_details') as FormArray;
+  storyDetailsArray.removeAt(index);
+}
 
 
   handleFileInput(event: any, index: number): void {
@@ -87,17 +90,66 @@ export class AddEditStoriesComponent {
       this.formData.append(`story_text${index}`, storyDetailGroup.get('story_text')?.value);
     });
     
-    this.webstory.createstories(this.formData).subscribe({
-      next: (res: any) => {
-        console.log('Success:', res);
-        this.toster.success("Story Created Successfully..")
-        this.resetFormData()
-      },
-      error: (error: any) => {
-        this.toster.error("Error While Creating Story..")
-        console.error('Error:', error);
-        this.resetFormData()
-      }
+    if(this.webstory.clickedRow == undefined){
+      this.webstory.createstories(this.formData).subscribe({
+        next: (res: any) => {
+          console.log('Success:', res);
+          this.toster.success("Story Created Successfully..")
+          this.resetFormData()
+          this.getAllStories()
+        },
+        error: (error: any) => {
+          this.toster.error("Error While Creating Story..")
+          console.error('Error:', error);
+          this.resetFormData()
+        }
+      })
+    }else{
+      const editRow = this.webstory.clickedRow
+      this.formData.append('_id', editRow._id)
+      this.webstory.updateStory(this.formData).subscribe({
+        next: (res: any) => {
+          console.log('Success:', res);
+          this.toster.success("Story Updated Successfully..")
+          this.resetFormData()
+          this.getAllStories()
+        },
+        error: (error: any) => {
+          this.toster.error("Error While Updating Story..")
+          console.error('Error:', error);
+          this.resetFormData()
+          this.loader.hide()
+        }
+      })
+    }
+    
+  }
+
+  editFormData(){
+    const editRow = this.webstory.clickedRow
+    if(editRow != undefined){
+      this.webStoryForm.patchValue({
+        story_heading: editRow.story_heading,
+        meta_description:editRow.meta_description,
+        category:editRow.category,
+        meta_keywords:editRow.meta_keywords,
+        story_details:editRow.storiesData,
+      })
+    }
+  }
+
+
+  getAllStories(){
+    this.webstory.getstory().subscribe({
+     next:(res:any)=>{
+      this.allStories = res.data
+     },
+     error:(error:any)=>{
+      console.log(error, "error issss")
+     }
     })
   }
+
+
+
 }

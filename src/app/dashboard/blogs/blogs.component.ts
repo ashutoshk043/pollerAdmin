@@ -126,7 +126,6 @@ export class BlogsComponent {
   editblog(row:any){
     this.loader.show()
     this.blogService.setEditBlogId(row)
-    this.loader.hide()
   }
 
 }

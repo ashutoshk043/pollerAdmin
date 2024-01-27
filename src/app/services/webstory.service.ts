@@ -8,6 +8,8 @@ import { environment } from 'src/environments/environment';
 })
 export class WebstoryService {
 
+  clickedRow:any
+
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   createstories(data:any){
@@ -30,5 +32,18 @@ export class WebstoryService {
 
   changeStatus(data:any){
     return this.http.post(`${environment.baseUrl}/chnagestorystatus`,data)
+  }
+
+  setEditStoryId(row:any){
+    this.clickedRow = row
+  }
+
+  updateStory(data:any){
+    const token = this.cookieService.get('auth')
+    return this.http.post(`${environment.baseUrl}/updateStories`,
+      data,
+      {
+        headers: new HttpHeaders({ 'authorization': `Bearer ${token}` })
+      })
   }
 }

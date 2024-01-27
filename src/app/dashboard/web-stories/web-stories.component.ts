@@ -33,8 +33,8 @@ export class WebStoriesComponent {
     })
   }
 
-  editwebstory(data:any){
-    alert('edit')
+  editwebstory(row:any){
+    this.webstory.setEditStoryId(row)
   }
 
   deletewebstory(id:any){
