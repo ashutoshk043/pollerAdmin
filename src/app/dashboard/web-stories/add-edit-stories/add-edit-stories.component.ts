@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, FormArray, FormBuilder, Validators, AbstractControl } from '@angular/forms'  
 import { WebstoryService } from 'src/app/services/webstory.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class AddEditStoriesComponent {
 
   
 
-  constructor(private fb:FormBuilder, private webstory:WebstoryService) {  
+  constructor(private fb:FormBuilder, private webstory:WebstoryService, private toster:ToastrService) {  
      
   }  
 
@@ -89,9 +90,11 @@ export class AddEditStoriesComponent {
     this.webstory.createstories(this.formData).subscribe({
       next: (res: any) => {
         console.log('Success:', res);
+        this.toster.success("Story Created Successfully..")
         this.resetFormData()
       },
       error: (error: any) => {
+        this.toster.error("Error While Creating Story..")
         console.error('Error:', error);
         this.resetFormData()
       }

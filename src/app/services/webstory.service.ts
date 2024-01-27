@@ -20,6 +20,15 @@ export class WebstoryService {
   }
 
   getstory(){
-    return this.http.get(`${environment.baseUrl}/getAllStoriesForDashboard`)
+    return this.http.get(`${environment.baseUrl}/getAllStoriesForDashboard`);
+  }
+
+  deleteStory(id:any){
+
+    return this.http.delete(`${environment.baseUrl}/deleteSingleStory/${id}`);
+  }
+
+  changeStatus(data:any){
+    return this.http.post(`${environment.baseUrl}/chnagestorystatus`,data)
   }
 }
