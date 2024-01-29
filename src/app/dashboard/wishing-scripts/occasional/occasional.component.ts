@@ -32,6 +32,18 @@ export class OccasionalComponent {
     })
   }
 
+  deleteScript(Id:any){
+    this.wishingScript.deleteScript(Id).subscribe({
+      next:(res:any)=>{
+        this.toster.success("Script Deleted Successfully..")
+        this.getAllnormal()
+      },
+      error:(error:any)=>{
+        this.toster.error("Error While Deleting Script !!!")
+      }
+    })
+  }
+
 
   normalScriptForm() {
     this.normalScript = this.fb.group({
@@ -97,7 +109,7 @@ export class OccasionalComponent {
           this.toster.success('Poll Create Successfully...');
           this.resetSubmittedFormData()
           this.normalScript.reset()
-          // this.getAllnormal()
+          this.getAllnormal()
         } else {
           this.toster.error('SomeThing errr');
           this.resetSubmittedFormData()

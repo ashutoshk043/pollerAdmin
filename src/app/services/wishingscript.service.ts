@@ -83,4 +83,9 @@ export class WishingscriptService {
         headers: new HttpHeaders({ 'authorization': `Bearer ${token}` })
       })
   }
+
+  deleteScript(id:any){
+    return this.http.delete(`${environment.baseUrl}/deleteScriptById/${id}`)
+  }
+
 }
