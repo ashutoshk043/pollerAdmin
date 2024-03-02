@@ -17,7 +17,7 @@ export class BlogsComponent {
   title:string="Blogs"
   receivedData:any
   baseUrl = environment.baseUrl
-  bucketBaseUrl = environment.bucketBaseUrl
+  bucketBaseUrl = environment.blogImageBucket
   authorId:any
   
   constructor(

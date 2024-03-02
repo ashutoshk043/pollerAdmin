@@ -99,7 +99,7 @@ export class AddEditComponent {
         keywords:editRow.keywords,
         metaDescription:editRow.keywords_description,
       })
-      this.url = environment.bucketBaseUrl+'/'+ editRow.thumbnail
+      this.url = environment.blogImageBucket+'/'+ editRow.thumbnail
     }
   }
 
