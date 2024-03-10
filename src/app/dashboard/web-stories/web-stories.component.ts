@@ -3,6 +3,7 @@ import { TitleService } from 'src/app/services/title.service';
 import { WebstoryService } from 'src/app/services/webstory.service';
 import { environment } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-web-stories',
@@ -13,9 +14,10 @@ export class WebStoriesComponent {
   title:string="Web Stories"
   allStories:any
   bucketBaseUrl= environment.bucketBaseUrl
-  constructor(private titleService: TitleService, private webstory:WebstoryService, private toster:ToastrService) {
+  constructor(private router:Router, private titleService: TitleService, private webstory:WebstoryService, private toster:ToastrService) {
 
   }
+
 
   ngOnInit() {
     this.titleService.setTitle(this.title);
@@ -31,6 +33,10 @@ export class WebStoriesComponent {
         console.log(error)
       }
     })
+  }
+
+  navigateToAddEditBlogs(): void {
+    this.router.navigate(['/home/add-edit-webstories']);
   }
 
   editwebstory(row:any){

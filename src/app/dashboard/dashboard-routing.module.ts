@@ -47,7 +47,7 @@ const routes: Routes = [
    } 
   },
   {
-    path:'add-edit-webstories',
+    path:'home/add-edit-webstories',
     component:AddEditStoriesComponent,
     canActivate:[authGuard],
     data : {  
@@ -103,7 +103,7 @@ const routes: Routes = [
    },
   },
   {
-    path:'add-edit-blogs',
+    path:'home/add-edit-blogs',
     component:AddEditComponent,
     canActivate:[authGuard],
     data : {  

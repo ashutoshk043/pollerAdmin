@@ -7,6 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 import jwt_decode from "jwt-decode";
 import Swal from 'sweetalert2'
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-blogs',
@@ -25,7 +26,8 @@ export class BlogsComponent {
     private blogService:BlogService,
     private toastr : ToastrService,
     private cookieService:CookieService,
-    private loader:NgxSpinnerService
+    private loader:NgxSpinnerService,
+    private router:Router,
     
     ) {}
 
@@ -81,12 +83,17 @@ export class BlogsComponent {
     this.loader.hide()
   }
 
-  deleteblog(_id:string){
-    this.loader.show()
-    let data = {_id:_id, authorId : this.authorId }
+  navigateToAddEditBlogs(): void {
+    this.router.navigate(['/home/add-edit-blogs']);
+  }
+  
+
+  deleteblog(_id: string): void {
+    // this.loader.show();
+    const data = { _id: _id, authorId: this.authorId };
     Swal.fire({
-      title: 'Are you sure want to delete this blog ?',
-      text: "You won't be able to revert this!",
+      title: 'Are you sure you want to delete this blog?',
+      text: 'You won\'t be able to revert this!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -95,33 +102,38 @@ export class BlogsComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         this.blogService.deleteBlogById(data).subscribe({
-          next:(res:any)=>{
-            if(res.status){
-              window.location.reload()
+          next: (res: any) => {
+            if (res.status) {
               Swal.fire(
                 'Deleted!',
                 'Blog has been deleted.',
                 'success'
-              )
-              
-            }else{
+              );
+              // Call getAllBlogs() only after successful deletion
+              this.getAllBlogs();
+            } else {
               Swal.fire(
                 'Something Error!',
                 'Please Refresh this page and try again.',
                 'error'
-              )
+              );
             }
+            // Hide loader after response is received
+            this.loader.hide();
           },
-          error:(error:any)=>{
-            this.toastr.error(error.message)
+          error: (error: any) => {
+            this.toastr.error(error.message);
+            // Hide loader in case of error
+            this.loader.hide();
           }
-        })
-
-        
+        });
+      } else {
+        // Hide loader if user cancels deletion
+        this.loader.hide();
       }
-    })
-    this.loader.hide()
+    });
   }
+  
 
   editblog(row:any){
     this.loader.show()
