@@ -4,6 +4,10 @@
 @import 'ngx-toastr/toastr';
 
 
+::ng-deep angular-editor-toolbar button i {
+    font-family: FontAwesome !important; 
+    } 
+
 *{
     box-sizing: border-box;
     margin: 0;
