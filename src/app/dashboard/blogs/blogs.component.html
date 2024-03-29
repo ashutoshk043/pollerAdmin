@@ -35,7 +35,7 @@
                 <td>{{row.authorName}}</td>
                 <td>
                     <ul class="d-flex flexStyle">
-                        <li routerLink="/add-edit-blogs" target="_blank" (click)="editblog(row)"><i class="bi bi-pencil-square"></i></li>
+                        <li routerLink="/home/add-edit-blogs" target="_blank" (click)="editblog(row)"><i class="bi bi-pencil-square"></i></li>
                         <li (click)="deleteblog(row._id)"><i class="bi bi-trash3-fill"></i></li>
                         <li (click)="changeStatus(row._id, row.status)" *ngIf="row.status=='published'"><i class="bi bi-toggle2-off"></i></li>
                         <li (click)="changeStatus(row._id, row.status)" *ngIf="row.status=='draft'"><i class="bi bi-toggle2-on"></i></li>

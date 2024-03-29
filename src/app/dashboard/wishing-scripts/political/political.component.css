@@ -19,3 +19,7 @@ label{
 .formDiv{
     overflow-y: scroll;
 }
+
+.flexStyle{
+    list-style: none;
+}

@@ -88,4 +88,8 @@ export class WishingscriptService {
     return this.http.delete(`${environment.baseUrl}/deleteScriptById/${id}`)
   }
 
+  deleteScriptPolitical(id:any){
+    return this.http.delete(`${environment.baseUrl}/deletepollscript/${id}`)
+  }
+
 }

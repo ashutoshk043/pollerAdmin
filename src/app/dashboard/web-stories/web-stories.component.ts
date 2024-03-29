@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class WebStoriesComponent {
   title:string="Web Stories"
   allStories:any
-  bucketBaseUrl= environment.bucketBaseUrl
+  bucketBaseUrl= environment.pollerPublicStory
   constructor(private router:Router, private titleService: TitleService, private webstory:WebstoryService, private toster:ToastrService) {
 
   }

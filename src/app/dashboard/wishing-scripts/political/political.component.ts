@@ -5,6 +5,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import Swal from 'sweetalert2';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-political',
@@ -19,7 +21,7 @@ export class PoliticalComponent {
   btnValue = "Submit"
   scriptIdToedit:any
 
-  constructor(private router: Router, private titleService: TitleService, private fb: FormBuilder, private wishingScript: WishingscriptService, private toster: ToastrService) { }
+  constructor(private loader:NgxSpinnerService, private router: Router, private titleService: TitleService, private fb: FormBuilder, private wishingScript: WishingscriptService, private toster: ToastrService) { }
 
   ngOnInit() {
     this.titleService.setTitle(this.title);
@@ -236,5 +238,47 @@ export class PoliticalComponent {
     })
   }
 
+  deleteScript(event:any){
+    Swal.fire({
+      title: 'Are you sure you want to delete this blog?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.wishingScript.deleteScriptPolitical(event._id).subscribe({
+          next: (res: any) => {
+            if (res.status) {
+              Swal.fire(
+                'Deleted!',
+                'Political Script has been deleted.',
+                'success'
+              );
+              this.getAllPolitical()
+            } else {
+              Swal.fire(
+                'Something Error!',
+                'Please Refresh this page and try again.',
+                'error'
+              );
+            }
+            // Hide loader after response is received
+            this.loader.hide();
+          },
+          error: (error: any) => {
+            this.toster.error(error.message);
+            // Hide loader in case of error
+            this.loader.hide();
+          }
+        });
+      } else {
+        // Hide loader if user cancels deletion
+        this.loader.hide();
+      }
+    });
+  }
 
 }

@@ -75,13 +75,13 @@ export class AddEditComponent {
 
   createBlogForm(){
     this.blogForm = this.formbuilder.group({
-        title: ['', Validators.required],
+        title: ['', [Validators.required, Validators.maxLength(200)]],
         htmlContent: ['', Validators.required],
         category:['', Validators.required],
         status:['', Validators.required],
         thumbnail:['', Validators.required],
         keywords:['', Validators.required],
-        metaDescription:['', Validators.required],
+        metaDescription:['', [Validators.required, Validators.maxLength(300)]],
     })
   }
 
