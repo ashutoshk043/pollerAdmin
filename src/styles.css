@@ -13,14 +13,15 @@
     margin: 0;
     padding: 0;
 }
-.router-page{
+.router-page {
     position: absolute;
     top: 6.5%;
-    left:16%;
-    height: 95vh;
-    width: 83vw;
+    left: 16%;
+    height: 87%; /* Adjusted height to leave space for padding */
+    min-width: 85%; /* Adjusted width */
     padding: 2%;
 }
+
 
 .title_text{
     font-size: 30px;
