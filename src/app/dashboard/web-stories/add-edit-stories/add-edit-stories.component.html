@@ -9,8 +9,8 @@
                 <div class="mb-3">
                     <label for="category" class="form-label">Category</label>
                     <select  class="form-select mb-3" aria-label=".form-select-lg example"  formControlName="category">
-                        <!-- <option *ngFor="let category of categories" [ngValue]=category>{{category}}</option> -->
-                        <option>Category</option>
+                        <option *ngFor="let category of categories" [ngValue]=category?.childCategory>{{category?.childCategory}}</option>
+                        <!-- <option>Category</option> -->
                     </select>
                   </div>
                 <div class="mb-3">

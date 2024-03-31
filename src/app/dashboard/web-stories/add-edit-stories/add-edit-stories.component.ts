@@ -3,6 +3,7 @@ import { FormGroup, FormControl, FormArray, FormBuilder, Validators, AbstractCon
 import { WebstoryService } from 'src/app/services/webstory.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { BlogService } from 'src/app/services/blog.service';
 
 
 @Component({
@@ -16,10 +17,10 @@ export class AddEditStoriesComponent {
   imageBuffer:any
   formData = new FormData()
   allStories:any
-
+  categories:any
   
 
-  constructor(private fb:FormBuilder, private webstory:WebstoryService, private toster:ToastrService, private loader: NgxSpinnerService) {  
+  constructor(private blogservice:BlogService, private fb:FormBuilder, private webstory:WebstoryService, private toster:ToastrService, private loader: NgxSpinnerService) {  
      
   }  
 
@@ -27,6 +28,7 @@ export class AddEditStoriesComponent {
     this.createWebStoryform()
     this.editFormData()
     this.getAllStories()
+    this.getAllCategories()
   }
 
   createWebStoryform() {
@@ -150,6 +152,17 @@ deleteOne(index: number) {
     })
   }
 
+
+  getAllCategories(){
+    this.blogservice.getAllCategories().subscribe({
+      next:(res:any)=>{
+        this.categories = res?.webStoryCategories
+      },
+      error:(error:any)=>{
+        console.log(error.message)
+      }
+    })
+  }
 
 
 }
